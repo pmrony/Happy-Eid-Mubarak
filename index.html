@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ঈদের শুভেচ্ছা</title>
+    <style>
+        body {
+            font-family: 'Hind Siliguri', 'SolaimanLipi', Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f0f8ff; /* হালকা আকাশি */
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 500px; /* কন্টেইনারের সর্বোচ্চ প্রস্থ */
+            margin: auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .ad-container {
+            margin: 15px auto; /* উপরে ও নীচে মার্জিন, এবং অনুভূমিকভাবে কেন্দ্রে */
+            max-width: 100%; /* কন্টেইনারের প্রস্থের বেশি হবে না */
+            overflow-x: auto; /* যদি বিজ্ঞাপনের প্রস্থ বেশি হয়, তাহলে স্ক্রলবার আসবে */
+            text-align: center; /* iframe কে কেন্দ্রে রাখার চেষ্টা */
+        }
+        .input-group {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745; /* সবুজ */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #greetingMessage {
+            font-size: 24px;
+            color: #007bff; /* নীল */
+            margin-bottom: 5px;
+        }
+        #senderInfo {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .share-options {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .share-options p {
+            margin-bottom: 5px;
+        }
+        .share-options input {
+            width: calc(100% - 80px);
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images.jpeg" alt="ঈদের শুভেচ্ছা ছবি">
+
+        <!-- বিজ্ঞাপন কোড শুরু -->
+        <div class="ad-container">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '27a81d48d040172d3ac2a76a2c6bfae8',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728, // এই প্রস্থটি কন্টেইনারের (500px) চেয়ে বড়
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/27a81d48d040172d3ac2a76a2c6bfae8/invoke.js"></script>
+        </div>
+        <!-- বিজ্ঞাপন কোড শেষ -->
+
+        <h1 id="greetingMessage"></h1>
+        <p id="senderInfo"></p>
+
+        <div class="input-group">
+            <label for="nameInput">আপনার নাম লিখুন:</label><br>
+            <input type="text" id="nameInput" placeholder="এখানে আপনার নাম লিখুন">
+        </div>
+
+        <button id="actionButton">শুভেচ্ছা তৈরি ও শেয়ার করুন</button>
+
+        <div id="shareLinkContainer" class="share-options" style="display: none;">
+            <p>এই লিঙ্কটি অন্যদের সাথে শেয়ার করুন:</p>
+            <input type="text" id="generatedLink" readonly>
+            <button id="copyLinkButton">কপি</button>
+        </div>
+    </div>
+
+    <script>
+        const greetingMessageElement = document.getElementById('greetingMessage');
+        const senderInfoElement = document.getElementById('senderInfo');
+        const nameInputElement = document.getElementById('nameInput');
+        const actionButton = document.getElementById('actionButton');
+        const shareLinkContainer = document.getElementById('shareLinkContainer');
+        const generatedLinkInput = document.getElementById('generatedLink');
+        const copyLinkButton = document.getElementById('copyLinkButton');
+
+        // URL থেকে প্রেরকের নাম চেক করুন
+        const urlParams = new URLSearchParams(window.location.search);
+        const senderNameFromUrl = urlParams.get('sender');
+
+        if (senderNameFromUrl) {
+            greetingMessageElement.textContent = "অগ্রিম ঈদের শুভেচ্ছা!";
+            senderInfoElement.textContent = `${decodeURIComponent(senderNameFromUrl)} এর পক্ষ থেকে।`;
+            nameInputElement.placeholder = "নতুন শুভেচ্ছা পাঠাতে আপনার নাম লিখুন";
+            actionButton.textContent = "নতুন করে শেয়ার করুন";
+        } else {
+            greetingMessageElement.textContent = "ঈদের শুভেচ্ছা বার্তা তৈরি করুন";
+        }
+
+        actionButton.addEventListener('click', () => {
+            const currentName = nameInputElement.value.trim();
+            if (!currentName) {
+                alert("অনুগ্রহ করে আপনার নাম লিখুন।");
+                return;
+            }
+
+            const baseUrl = window.location.origin + window.location.pathname;
+            const shareableLink = `${baseUrl}?sender=${encodeURIComponent(currentName)}`;
+            const shareMessage = `অগ্রিম ঈদের শুভেচ্ছা! ${currentName} আপনাকে ঈদের শুভেচ্ছা জানিয়েছেন।`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ঈদের শুভেচ্ছা!',
+                    text: shareMessage,
+                    url: shareableLink,
+                })
+                .then(() => console.log('সফলভাবে শেয়ার করা হয়েছে'))
+                .catch((error) => {
+                    console.log('শেয়ার করতে সমস্যা হয়েছে:', error);
+                    displayShareLinkFallback(shareableLink);
+                });
+            } else {
+                displayShareLinkFallback(shareableLink);
+            }
+        });
+
+        function displayShareLinkFallback(link) {
+            generatedLinkInput.value = link;
+            shareLinkContainer.style.display = 'block';
+        }
+
+        copyLinkButton.addEventListener('click', () => {
+            generatedLinkInput.select();
+            generatedLinkInput.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                document.execCommand('copy');
+                alert("লিঙ্ক কপি করা হয়েছে!");
+            } catch (err) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(generatedLinkInput.value)
+                        .then(() => alert("লিঙ্ক কপি করা হয়েছে!"))
+                        .catch(e => alert("কপি করা যায়নি: " + e));
+                } else {
+                    alert("দুঃখিত, আপনার ব্রাউজার স্বয়ংক্রিয়ভাবে কপি সমর্থন করে না। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।");
+                }
+            }
+            shareLinkContainer.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
